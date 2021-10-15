@@ -1,9 +1,8 @@
-let timeframe = 'weekly'; //default value
+let timeframe = 'weekly'; 
 const container = document.querySelector('.container');
-let regularCards; //place holder for all cards (work, play, study, etc)
+let regularCards; 
 
 
-// 1. Initialize Menu
 const menu = document.querySelectorAll('.menu-link');
 
 menu.forEach(element => {
@@ -11,34 +10,33 @@ menu.forEach(element => {
 });
 
 
-// 2. Get JSON Data & Create Cards
+
 let data = {};
 
 fetch('data.json')
     .then(resp => resp.json())
     .then(jsonData => {
 
-        //Create Cards
+       
         jsonData.forEach(element => {
             container.insertAdjacentHTML('beforeend', 
                 createRegularCard(element, timeframe));
         });
 
-        //Convert array to dict
+        
         jsonData.forEach(element => {
             data[element.title] = element.timeframes;
         });
 
-        //I want to have reference to created cards
+        
         regularCards = document.querySelectorAll('.regular-card');
-        //console.log(regularCards);
+      
     });
 
 
-// -------- Functions
+
 
 function menuOnClick(event){
-    //console.log('click', event.target.innerText.toLowerCase());
     menu.forEach(element => {
         element.classList.remove('menu-active');
     });
